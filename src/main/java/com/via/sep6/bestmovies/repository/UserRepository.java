@@ -28,10 +28,10 @@ public class UserRepository {
     MovieService movieService;
 
     public UserRepository() throws IOException {
-        InputStream serviceAccount = new FileInputStream("serviceaccount.json");
-        GoogleCredentials credentials = GoogleCredentials.fromStream(serviceAccount);
+        GoogleCredentials credentials = GoogleCredentials.getApplicationDefault();
         FirebaseOptions options = new FirebaseOptions.Builder()
                 .setCredentials(credentials)
+                .setProjectId("bestmovies-e13f7")
                 .build();
         FirebaseApp.initializeApp(options);
 
