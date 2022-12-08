@@ -48,9 +48,6 @@ jobs:
       - name: Setup GCP environment
         uses: google-github-actions/setup-gcloud@v1
 
-      - name: Pre-build environment
-        run: docker pull ${{ env.REGION }}-docker.pkg.dev/${{ secrets.GCP_PROJECT_ID }}/movie-service/${{ env.IMAGE_NAME }}:0.0.1
-
       - name: Build jvm image
         run : |
           mvn clean verify
