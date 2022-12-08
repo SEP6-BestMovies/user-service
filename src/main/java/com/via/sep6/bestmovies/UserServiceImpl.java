@@ -3,6 +3,7 @@ package com.via.sep6.bestmovies;
 
 import com.via.sep6.best.movies.movie.MovieServiceOuterClass.Movie;
 import com.via.sep6.best.movies.user.UserService;
+import com.via.sep6.best.movies.user.UserServiceOuterClass;
 import com.via.sep6.best.movies.user.UserServiceOuterClass.GetTopMoviesRequest;
 import com.via.sep6.best.movies.user.UserServiceOuterClass.GetTopMoviesResponse;
 import com.via.sep6.bestmovies.repository.UserRepository;
@@ -27,5 +28,14 @@ public class UserServiceImpl implements UserService {
         }
 
         return Uni.createFrom().item(builder.build());
+    }
+
+    @Override
+    public Uni<UserServiceOuterClass.AddMovieToFavouriteResponse> addMovieToFavourite(UserServiceOuterClass.AddMovieToFavouriteRequest request) {
+        repository.addMovieToFavourite(request.getUsername(), request.getMovieId());
+
+        UserServiceOuterClass.AddMovieToFavouriteResponse response = UserServiceOuterClass.AddMovieToFavouriteResponse.newBuilder().build();
+
+        return Uni.createFrom().item(response);
     }
 }

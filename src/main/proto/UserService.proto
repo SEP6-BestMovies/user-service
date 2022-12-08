@@ -15,6 +15,16 @@ message GetTopMoviesResponse {
   repeated Movie movie = 1;
 }
 
+message AddMovieToFavouriteRequest {
+  string username = 1;
+  int32 movieId = 2;
+}
+
+message AddMovieToFavouriteResponse {
+  string message = 1;
+}
+
 service UserService {
   rpc getTopMovies(GetTopMoviesRequest) returns (GetTopMoviesResponse) {}
+  rpc addMovieToFavourite(AddMovieToFavouriteRequest) returns (AddMovieToFavouriteResponse) {}
 }
