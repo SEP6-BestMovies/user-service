@@ -10,8 +10,6 @@ import com.google.firebase.FirebaseOptions;
 import com.google.firebase.cloud.FirestoreClient;
 import com.via.sep6.best.movies.movie.MovieService;
 import com.via.sep6.best.movies.movie.MovieServiceOuterClass;
-import com.via.sep6.best.movies.user.UserServiceOuterClass;
-import com.via.sep6.bestmovies.model.Movie;
 import io.quarkus.grpc.GrpcClient;
 
 import javax.enterprise.context.ApplicationScoped;
@@ -20,7 +18,6 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.time.Duration;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 @ApplicationScoped
