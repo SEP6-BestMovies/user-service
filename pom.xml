@@ -96,6 +96,12 @@
             <groupId>com.google.api-client</groupId>
             <artifactId>google-api-client-appengine</artifactId>
         </dependency>
+        <!-- https://mvnrepository.com/artifact/com.google.gms.google-services/com.google.gms.google-services.gradle.plugin -->
+        <dependency>
+            <groupId>com.google.gms</groupId>
+            <artifactId>google-services</artifactId>
+            <version>4.3.0</version>
+        </dependency>
         <dependency>
             <groupId>com.via.sep6.bestmovies</groupId>
             <artifactId>movieservice</artifactId>

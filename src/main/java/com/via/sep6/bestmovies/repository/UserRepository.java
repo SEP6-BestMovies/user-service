@@ -28,16 +28,16 @@ public class UserRepository {
     @GrpcClient
     MovieService movieService;
 
+    private Firestore db;
+
     public UserRepository() throws IOException {
          FirestoreOptions firestoreOptions =
                 FirestoreOptions.getDefaultInstance().toBuilder()
                         .setProjectId("bestmovies-e13f7")
                         .setCredentials(GoogleCredentials.getApplicationDefault())
                         .build();
-        Firestore db = firestoreOptions.getService();
+        db = firestoreOptions.getService();
     }
-
-    Firestore db = FirestoreClient.getFirestore();
 
     public List<MovieServiceOuterClass.Movie> getTopMovies() {
         MovieServiceOuterClass.GetMoviesRequest request = MovieServiceOuterClass.GetMoviesRequest.newBuilder().build();
