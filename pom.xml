@@ -115,13 +115,7 @@
     <repositories>
         <repository>
             <id>artifact-registry</id>
-            <url>artifactregistry://europe-north1-maven.pkg.dev/bestmovies-e13f7/userservice</url>
-            <releases>
-                <enabled>true</enabled>
-            </releases>
-            <snapshots>
-                <enabled>true</enabled>
-            </snapshots>
+            <url>artifactregistry://europe-north1-maven.pkg.dev/bestmovies-e13f7/movieservice</url>
         </repository>
     </repositories>
     <build>
