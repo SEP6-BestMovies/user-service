@@ -49,7 +49,9 @@ jobs:
         uses: google-github-actions/setup-gcloud@v1
 
       - name: Build jvm image
-        run : mvn clean package -Pjvm --file pom.xml
+        run : |
+          mvn clean verify
+          mvn clean package -Pjvm --file pom.xml
 
       - name: Build maven package
         run: docker build -f src/main/docker/Dockerfile.legacy-jar -t ${{ env.REGION }}-${{ env.MAVEN_REGISTRY }}/${{ secrets.GCP_PROJECT_ID }}/${{ env.MAVEN_NAME }}/${{ env.IMAGE_NAME }}:$(cat VERSION) .
