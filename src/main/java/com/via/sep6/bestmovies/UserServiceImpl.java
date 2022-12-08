@@ -1,6 +1,5 @@
 package com.via.sep6.bestmovies;
 
-
 import com.via.sep6.best.movies.movie.MovieServiceOuterClass.Movie;
 import com.via.sep6.best.movies.user.UserService;
 import com.via.sep6.best.movies.user.UserServiceOuterClass;
