@@ -26,7 +26,6 @@ public class UserRepository {
     @GrpcClient
     MovieService movieService;
 
-    @Inject
     Firestore db;
 
     public UserRepository() {
