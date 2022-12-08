@@ -6,7 +6,6 @@ import io.quarkus.grpc.GrpcClient;
 
 import javax.enterprise.context.ApplicationScoped;
 import java.time.Duration;
-import java.util.ArrayList;
 import java.util.List;
 
 @ApplicationScoped
