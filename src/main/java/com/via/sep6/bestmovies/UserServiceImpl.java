@@ -1,9 +1,10 @@
 package com.via.sep6.bestmovies;
 
 
-import com.via.sep6.best.movies.MovieServiceOuterClass;
+import com.via.sep6.best.movies.movie.MovieServiceOuterClass.Movie;
 import com.via.sep6.best.movies.user.UserService;
-import com.via.sep6.best.movies.user.UserServiceOuterClass;
+import com.via.sep6.best.movies.user.UserServiceOuterClass.GetTopMoviesRequest;
+import com.via.sep6.best.movies.user.UserServiceOuterClass.GetTopMoviesResponse;
 import com.via.sep6.bestmovies.repository.UserRepository;
 import io.quarkus.grpc.GrpcService;
 import io.smallrye.mutiny.Uni;
@@ -17,11 +18,11 @@ public class UserServiceImpl implements UserService {
     UserRepository repository;
 
     @Override
-    public Uni<UserServiceOuterClass.GetTopMoviesResponse> getTopMovies(UserServiceOuterClass.GetTopMoviesRequest request) {
-        List<MovieServiceOuterClass.Movie> movies = repository.getTopMovies();
-        UserServiceOuterClass.GetTopMoviesResponse.Builder builder = UserServiceOuterClass.GetTopMoviesResponse.newBuilder();
+    public Uni<GetTopMoviesResponse> getTopMovies(GetTopMoviesRequest request) {
+        List<Movie> movies = repository.getTopMovies();
+        GetTopMoviesResponse.Builder builder = GetTopMoviesResponse.newBuilder();
 
-        for (MovieServiceOuterClass.Movie movie : movies) {
+        for (Movie movie : movies) {
            builder.addMovie(ObjectMapper.movieToUserMovie(movie));
         }
 
