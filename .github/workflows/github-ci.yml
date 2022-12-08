@@ -15,7 +15,12 @@ on:
     branches: [ "main" ]
 
 env:
+  MAVEN_REGISTRY: maven.pkg.dev
   IMAGE_NAME: com/via/sep6/bestmovies/userservice
+  OWNER: bestmovies
+  MAVEN_NAME: userservice
+  GCP_APP_NAME: user-service
+  REGION: europe-north1
 
 jobs:
   setup-build-deploy:
@@ -33,5 +38,22 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v3
 
+      - name: Login to GCP
+        uses: google-github-actions/auth@v1
+        with:
+          project_id: ${{ secrets.GCP_PROJECT_ID }}
+          service_account: ${{ secrets.GCP_EMAIL }}
+          credentials_json: ${{ secrets.GCP_CREDENTIALS }}
+
+      - name: Setup GCP environment
+        uses: google-github-actions/setup-gcloud@v1
+
       - name: Build jvm image
         run : mvn clean package -Pjvm --file pom.xml
+
+      - name: Build maven package
+        run: docker build -f src/main/docker/Dockerfile.legacy-jar -t ${{ env.REGION }}-${{ env.MAVEN_REGISTRY }}/${{ secrets.GCP_PROJECT_ID }}/${{ env.MAVEN_NAME }}/${{ env.IMAGE_NAME }}:$(cat VERSION) .
+
+      - name: Deploy maven package
+        run: |
+          mvn deploy -Durl=artifactregistry://${{ env.REGION }}-${{ env.MAVEN_REGISTRY }}/${{ secrets.GCP_PROJECT_ID }}/${{ env.MAVEN_NAME }}/${{ env.IMAGE_NAME }}:$(cat VERSION) -DreleaseVersion=$(cat VERSION)
