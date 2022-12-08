@@ -11,6 +11,7 @@ import com.google.firebase.cloud.FirestoreClient;
 import com.via.sep6.best.movies.movie.MovieService;
 import com.via.sep6.best.movies.movie.MovieServiceOuterClass;
 import io.quarkus.grpc.GrpcClient;
+import java.util.List;
 
 import javax.enterprise.context.ApplicationScoped;
 import java.io.FileInputStream;
