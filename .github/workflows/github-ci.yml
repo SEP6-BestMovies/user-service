@@ -70,4 +70,4 @@ jobs:
 
       - name: Deploy to cloud run
         run: |
-          gcloud run deploy movie-service --image ${{ env.REGION }}-${{ env.DOCKER_REGISTRY }}/${{ secrets.GCP_PROJECT_ID }}/${{ env.GCP_APP_NAME }}/${{ env.IMAGE_NAME }}:$(cat VERSION) --region ${{ env.REGION }} --platform managed
+          gcloud run deploy ${{ env.GCP_APP_NAME }} --image ${{ env.REGION }}-${{ env.DOCKER_REGISTRY }}/${{ secrets.GCP_PROJECT_ID }}/${{ env.GCP_APP_NAME }}/${{ env.IMAGE_NAME }}:$(cat VERSION) --region ${{ env.REGION }} --platform managed
