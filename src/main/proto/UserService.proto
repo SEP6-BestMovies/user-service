@@ -1,6 +1,7 @@
 syntax = 'proto3';
 
 package com.via.sep6.best.movies.user;
+option java_package = "com.via.sep6.best.movies.user";
 
 message Movie {
   int32 id = 1;
