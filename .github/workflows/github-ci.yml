@@ -15,6 +15,7 @@ on:
     branches: [ "main" ]
 
 env:
+  DOCKER_REGISTRY: docker.pkg.dev
   MAVEN_REGISTRY: maven.pkg.dev
   IMAGE_NAME: com/via/sep6/bestmovies/userservice
   OWNER: bestmovies
@@ -48,9 +49,11 @@ jobs:
       - name: Setup GCP environment
         uses: google-github-actions/setup-gcloud@v1
 
+      - name: Configure Docker
+        run: gcloud auth configure-docker ${{ env.REGION }}-docker.pkg.dev
+
       - name: Build jvm image
         run : |
-          mvn clean verify
           mvn clean package -Pjvm --file pom.xml
 
       - name: Build maven package
@@ -58,4 +61,4 @@ jobs:
 
       - name: Deploy maven package
         run: |
-          mvn deploy -Durl=artifactregistry://${{ env.REGION }}-${{ env.MAVEN_REGISTRY }}/${{ secrets.GCP_PROJECT_ID }}/${{ env.MAVEN_NAME }}/${{ env.IMAGE_NAME }}:$(cat VERSION) -DreleaseVersion=$(cat VERSION)
+          mvn deploy -Durl=artifactregistry://${{ env.REGION }}-${{ env.MAVEN_REGISTRY }}/${{ secrets.GCP_PROJECT_ID }}/${{ env.MAVEN_NAME }}/${{ env.IMAGE_NAME }}:$(cat VERSION)
