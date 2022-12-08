@@ -1,7 +1,7 @@
 package com.via.sep6.bestmovies.repository;
 
-import com.via.sep6.best.movies.MovieService;
-import com.via.sep6.best.movies.MovieServiceOuterClass;
+import com.via.sep6.best.movies.movie.MovieService;
+import com.via.sep6.best.movies.movie.MovieServiceOuterClass;
 import io.quarkus.grpc.GrpcClient;
 
 import javax.enterprise.context.ApplicationScoped;
