@@ -4,6 +4,7 @@ import com.google.api.core.ApiFuture;
 import com.google.auth.oauth2.GoogleCredentials;
 import com.google.cloud.firestore.DocumentReference;
 import com.google.cloud.firestore.Firestore;
+import com.google.cloud.firestore.FirestoreOptions;
 import com.google.cloud.firestore.WriteResult;
 import com.google.firebase.FirebaseApp;
 import com.google.firebase.FirebaseOptions;
@@ -28,14 +29,12 @@ public class UserRepository {
     MovieService movieService;
 
     public UserRepository() throws IOException {
-        GoogleCredentials credentials = GoogleCredentials.getApplicationDefault();
-        FirebaseOptions options = new FirebaseOptions.Builder()
-                .setCredentials(credentials)
-                .setProjectId("bestmovies-e13f7")
-                .build();
-        FirebaseApp.initializeApp(options);
-
-        Firestore db = FirestoreClient.getFirestore();
+         FirestoreOptions firestoreOptions =
+                FirestoreOptions.getDefaultInstance().toBuilder()
+                        .setProjectId("bestmovies-e13f7")
+                        .setCredentials(GoogleCredentials.getApplicationDefault())
+                        .build();
+        Firestore db = firestoreOptions.getService();
     }
 
     Firestore db = FirestoreClient.getFirestore();
