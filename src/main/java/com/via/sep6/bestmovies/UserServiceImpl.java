@@ -7,7 +7,6 @@ import com.via.sep6.best.movies.user.UserServiceOuterClass;
 import com.via.sep6.bestmovies.repository.UserRepository;
 import io.quarkus.grpc.GrpcService;
 import io.smallrye.mutiny.Uni;
-
 import javax.inject.Inject;
 import java.util.List;
 
