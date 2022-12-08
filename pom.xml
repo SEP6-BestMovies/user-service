@@ -102,6 +102,28 @@
             <version>1.0.0-SNAPSHOT</version>
         </dependency>
     </dependencies>
+    <distributionManagement>
+        <snapshotRepository>
+            <id>artifact-registry</id>
+            <url>artifactregistry://europe-north1-maven.pkg.dev/bestmovies-e13f7/userservice</url>
+        </snapshotRepository>
+        <repository>
+            <id>artifact-registry</id>
+            <url>artifactregistry://europe-north1-maven.pkg.dev/bestmovies-e13f7/userservice</url>
+        </repository>
+    </distributionManagement>
+    <repositories>
+        <repository>
+            <id>artifact-registry</id>
+            <url>artifactregistry://europe-north1-maven.pkg.dev/bestmovies-e13f7/userservice</url>
+            <releases>
+                <enabled>true</enabled>
+            </releases>
+            <snapshots>
+                <enabled>true</enabled>
+            </snapshots>
+        </repository>
+    </repositories>
     <build>
         <extensions>
             <extension>
