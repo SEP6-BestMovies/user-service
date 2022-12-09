@@ -13,6 +13,7 @@ import io.quarkus.runtime.Startup;
 
 import java.util.List;
 
+import javax.annotation.PostConstruct;
 import javax.enterprise.context.ApplicationScoped;
 import javax.inject.Inject;
 import java.io.IOException;
@@ -32,7 +33,7 @@ public class UserRepository {
     public UserRepository() {
     }
 
-    @Startup
+    @PostConstruct
     public void init() throws IOException{
             FirestoreOptions firestoreOptions =
                     FirestoreOptions.getDefaultInstance().toBuilder()
