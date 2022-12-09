@@ -14,6 +14,7 @@ import io.quarkus.runtime.Startup;
 import java.util.List;
 
 import javax.enterprise.context.ApplicationScoped;
+import javax.inject.Inject;
 import java.io.IOException;
 import java.time.Duration;
 import java.util.HashMap;
@@ -22,6 +23,7 @@ import java.util.Map;
 @ApplicationScoped
 public class UserRepository {
 
+    @Inject
     @GrpcClient("MovieService")
     MovieService movieService;
 
