@@ -9,6 +9,8 @@ import com.via.sep6.bestmovies.repository.UserRepository;
 import io.quarkus.grpc.GrpcService;
 import io.smallrye.common.annotation.Blocking;
 import io.smallrye.mutiny.Uni;
+import org.jboss.logging.Logger;
+
 import javax.inject.Inject;
 import java.util.List;
 
@@ -18,9 +20,15 @@ public class UserServiceImpl implements UserService {
     @Inject
     UserRepository repository;
 
+    @Inject
+    Logger log;
+
     @Override
     public Uni<GetTopMoviesResponse> getTopMovies(GetTopMoviesRequest request) {
+
+        log.info("Get Top Movies Request received");
         List<Movie> movies = repository.getTopMovies();
+        
         GetTopMoviesResponse.Builder builder = GetTopMoviesResponse.newBuilder();
 
         for (Movie movie : movies) {
@@ -30,9 +38,9 @@ public class UserServiceImpl implements UserService {
         return Uni.createFrom().item(builder.build());
     }
 
-    @Blocking
     @Override
     public Uni<UserServiceOuterClass.AddMovieToFavouriteResponse> addMovieToFavourite(UserServiceOuterClass.AddMovieToFavouriteRequest request) {
+        log.info("Add Movies to Favourite Request received");
         repository.addMovieToFavourite(request.getUsername(), request.getMovieId());
 
         UserServiceOuterClass.AddMovieToFavouriteResponse response = UserServiceOuterClass.AddMovieToFavouriteResponse.newBuilder().build();
