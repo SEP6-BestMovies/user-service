@@ -23,12 +23,13 @@ public class UserServiceImpl implements UserService {
     @Inject
     Logger log;
 
+    @Blocking
     @Override
     public Uni<GetTopMoviesResponse> getTopMovies(GetTopMoviesRequest request) {
 
         log.info("Get Top Movies Request received");
         List<Movie> movies = repository.getTopMovies();
-        
+
         GetTopMoviesResponse.Builder builder = GetTopMoviesResponse.newBuilder();
 
         for (Movie movie : movies) {
