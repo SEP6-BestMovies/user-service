@@ -3,6 +3,9 @@ package com.via.sep6.bestmovies;
 import com.via.sep6.best.movies.movie.MovieServiceOuterClass;
 import com.via.sep6.best.movies.user.UserServiceOuterClass.Movie;
 
+import javax.enterprise.context.ApplicationScoped;
+
+@ApplicationScoped
 public class ObjectMapper {
 
     public static Movie movieToUserMovie(MovieServiceOuterClass.Movie movie) {
