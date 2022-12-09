@@ -7,6 +7,7 @@ import com.via.sep6.best.movies.user.UserServiceOuterClass.GetTopMoviesRequest;
 import com.via.sep6.best.movies.user.UserServiceOuterClass.GetTopMoviesResponse;
 import com.via.sep6.bestmovies.repository.UserRepository;
 import io.quarkus.grpc.GrpcService;
+import io.smallrye.common.annotation.Blocking;
 import io.smallrye.mutiny.Uni;
 import javax.inject.Inject;
 import java.util.List;
@@ -29,6 +30,7 @@ public class UserServiceImpl implements UserService {
         return Uni.createFrom().item(builder.build());
     }
 
+    @Blocking
     @Override
     public Uni<UserServiceOuterClass.AddMovieToFavouriteResponse> addMovieToFavourite(UserServiceOuterClass.AddMovieToFavouriteRequest request) {
         repository.addMovieToFavourite(request.getUsername(), request.getMovieId());
