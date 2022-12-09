@@ -7,18 +7,24 @@ import com.google.cloud.firestore.FirestoreOptions;
 import com.via.sep6.best.movies.movie.MovieService;
 import com.via.sep6.best.movies.movie.MovieServiceOuterClass;
 import io.quarkus.grpc.GrpcClient;
+import io.smallrye.mutiny.Uni;
 
 import java.util.List;
 
 import javax.annotation.PostConstruct;
 import javax.enterprise.context.ApplicationScoped;
 import javax.inject.Inject;
+import javax.ws.rs.GET;
+import javax.ws.rs.Path;
+import javax.ws.rs.Produces;
+import javax.ws.rs.core.MediaType;
 import java.io.IOException;
 import java.time.Duration;
 import java.util.HashMap;
 import java.util.Map;
 
-@ApplicationScoped
+@Path("/")
+@Produces(MediaType.APPLICATION_JSON)
 public class UserRepository {
 
     @Inject
@@ -40,10 +46,13 @@ public class UserRepository {
             db = firestoreOptions.getService();
     }
 
-    public List<MovieServiceOuterClass.Movie> getTopMovies() {
+    @GET
+    @Path("/mutiny")
+    public Uni<List<MovieServiceOuterClass.Movie>> getTopMovies() {
         MovieServiceOuterClass.GetMoviesRequest request = MovieServiceOuterClass.GetMoviesRequest.newBuilder().build();
-        MovieServiceOuterClass.GetMoviesResponse response = movieService.getMovies(request).await().atMost(Duration.ofSeconds(5));
-        return response.getMoviesList();
+        return movieService.getMovies(request)
+                .onItem()
+                .transform(MovieServiceOuterClass.GetMoviesResponse::getMoviesList);
     }
 
     public void addMovieToFavourite(String username, int movieId) {
