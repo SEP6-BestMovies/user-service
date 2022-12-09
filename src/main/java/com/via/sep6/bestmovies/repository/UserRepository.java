@@ -9,18 +9,15 @@ import com.via.sep6.best.movies.movie.MovieServiceOuterClass;
 import io.quarkus.grpc.GrpcClient;
 import io.smallrye.mutiny.Uni;
 
-import java.util.List;
-
 import javax.annotation.PostConstruct;
-import javax.enterprise.context.ApplicationScoped;
 import javax.inject.Inject;
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 import java.io.IOException;
-import java.time.Duration;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 @Path("/")
@@ -37,17 +34,16 @@ public class UserRepository {
     }
 
     @PostConstruct
-    public void init() throws IOException{
-            FirestoreOptions firestoreOptions =
-                    FirestoreOptions.getDefaultInstance().toBuilder()
-                            .setProjectId("bestmovies-e13f7")
-                            .setCredentials(GoogleCredentials.getApplicationDefault())
-                            .build();
-            db = firestoreOptions.getService();
+    public void init() throws IOException {
+        FirestoreOptions firestoreOptions =
+                FirestoreOptions.getDefaultInstance().toBuilder()
+                        .setProjectId("bestmovies-e13f7")
+                        .setCredentials(GoogleCredentials.getApplicationDefault())
+                        .build();
+        db = firestoreOptions.getService();
     }
 
     @GET
-    @Path("/mutiny")
     public Uni<List<MovieServiceOuterClass.Movie>> getTopMovies() {
         MovieServiceOuterClass.GetMoviesRequest request = MovieServiceOuterClass.GetMoviesRequest.newBuilder().build();
         return movieService.getMovies(request)
