@@ -10,6 +10,7 @@ import io.quarkus.grpc.GrpcClient;
 import io.smallrye.mutiny.Uni;
 
 import javax.annotation.PostConstruct;
+import javax.enterprise.context.ApplicationScoped;
 import javax.inject.Inject;
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;
@@ -20,8 +21,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-@Path("/")
-@Produces(MediaType.APPLICATION_JSON)
+@ApplicationScoped
 public class UserRepository {
 
     @Inject
@@ -43,7 +43,6 @@ public class UserRepository {
         db = firestoreOptions.getService();
     }
 
-    @GET
     public Uni<List<MovieServiceOuterClass.Movie>> getTopMovies() {
         MovieServiceOuterClass.GetMoviesRequest request = MovieServiceOuterClass.GetMoviesRequest.newBuilder().build();
         return movieService.getMovies(request)
